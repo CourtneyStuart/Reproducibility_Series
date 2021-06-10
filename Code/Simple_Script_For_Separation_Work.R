@@ -11,7 +11,6 @@
 # set-up =======================================================================
 
 library(ggplot2)
-library(here)
 data = iris
 
 # make function to subset by species 
@@ -41,7 +40,7 @@ simple_fig = ggplot(data = setosa_subset) +
   geom_point(aes(x = Sepal.Length, y = Petal.Width)) +
   labs(x = "sepal length", y = "petal width") +
   theme_bw()
-ggsave(here('./Figs/simple_iris_fig.png'), simple_fig)
+ggsave('./Figs/simple_iris_fig.png', simple_fig)
 
 # further subset data
 setosa_subset = setosa_subset[which(setosa_subset$Petal.Width > 0.2), ]
@@ -54,10 +53,10 @@ setosa_model = glm(Sepal.Length ~ Petal.Width*Petal.Length,
                    data = setosa_subset)
 
 summary(setosa_model)
-saveRDS(setosa_model, here('./Output/Setosa_Model_Object.rds'))
+saveRDS(setosa_model, './Output/Setosa_Model_Object.rds')
 
 # read in rds and plot results
-setosa_model = readRDS(here('./Output/Setosa_Model_Object.rds'))
+setosa_model = readRDS('./Output/Setosa_Model_Object.rds')
 
 # model prediction
 new_data = data.frame(Petal.Length = seq(1.3, 1.9, 0.1),
@@ -70,4 +69,4 @@ prediction_plot = ggplot(data = new_data) +
             size = 2, colour = 'red') +
   labs(x = "petal length", y = "sepal length prediction") +
   theme_bw()
-ggsave(here('./Figs/prediction_plot_simple.png'), prediction_plot)
+ggsave('./Figs/prediction_plot_simple.png', prediction_plot)

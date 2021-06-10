@@ -1,0 +1,11 @@
+version: "3.5"
+services:
+  Reproducibility_Series:
+    build:
+      context: .
+    volumes:
+      - .:/main 
+      
+# line 3 tells us what image we are actually building (i.e. the name of our repo)
+# the volumes: - .:/main will read the input file and write out the expanded file -
+# mapping the folder (x) to the main folder
